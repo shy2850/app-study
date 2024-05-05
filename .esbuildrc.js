@@ -35,7 +35,7 @@ let config = [
     {
         ...baseOption,
         entryPoints: {
-            sw: 'src/sw.ts'
+            sw: './sw.ts'
         },
         outdir: '/',
     },

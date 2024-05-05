@@ -8,6 +8,14 @@ createServer({
     gzip: true,
     try_files: 'index.html',
     namehash: {
+        entries: [
+            'index\\.html',
+            '^sw\\.js$',
+        ],
+        searchValue: [
+            '\\s(?:href|src)="([^"]*?)"',
+            '__OUTPUT_PATH__\\("([^"]*?)"\\)',
+        ],
         publicPath: mode === 'build' ? '/app-study/' : '/',
     },
     buildFilter: p => /^(index|manifest|favicon|img|$)/.test(p),

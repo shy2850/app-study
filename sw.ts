@@ -1,17 +1,20 @@
-import { CACHE_KEY } from "./config";
-import { FetchEvent } from "./interface";
-import { publicPath } from './config'
+import { CACHE_KEY } from "./src/config";
+import { FetchEvent } from "./src/interface";
+import { publicPath } from './src/config'
 
+const RENAME = {
+    __OUTPUT_PATH__: (a = '') => a
+}
 const CACHES = [
-    '',
-    'index.html',
-    'manifest.json',
-    'favicon.ico',
-    'static/bundle.js',
-    'img/frozen.css',
-    'mg/math.png',
-    'img/study-48x48.png'
-].map(p => `${publicPath}${p}`)
+    publicPath,
+    RENAME.__OUTPUT_PATH__("./index.html"),
+    RENAME.__OUTPUT_PATH__("./manifest.json"),
+    RENAME.__OUTPUT_PATH__("./favicon.ico"),
+    RENAME.__OUTPUT_PATH__("./src/index.tsx"),
+    RENAME.__OUTPUT_PATH__("./img/frozen.css"),
+    RENAME.__OUTPUT_PATH__("./img/math.png"),
+    RENAME.__OUTPUT_PATH__("./img/study-48x48.png"),
+]
 
 self.addEventListener('install', function (_event) {
     const event = _event as FetchEvent
