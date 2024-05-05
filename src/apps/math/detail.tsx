@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import * as apis from '../../db'
 import { Question } from '../../interface'
 import { Link, useParams } from 'react-router-dom'
+import { publicPath } from '../../config'
 
 export const Detail = () => {
     const { id } = useParams()
@@ -19,7 +20,12 @@ export const Detail = () => {
     }, [])
 
     const width = document.documentElement.clientWidth
-    return <>
+    const perfect = list.length > 0 && list.every(t => t.result + '' === t.answer + '')
+    return <div style={{
+        height: '100vh',
+        background: perfect ? '#000' : '#fff',
+        color: perfect ? '#fff' : '#000',
+    }}>
         {list.length > 0 ? <>
             <div className="ui-progress">
                 <span style={{ width: `${list.filter(t => !!t.answer).length * 100 / list.length}%` }}></span>
@@ -30,7 +36,9 @@ export const Detail = () => {
                     <b>{(list.filter(t => t.result + '' === t.answer + '').length * 100 / list.length).toFixed(0)}</b> 分
                 </span>
             </div>
-            <div className="ui-form ui-border-t">
+            { perfect
+            ? <img style={{ width: '90%', display: 'block', margin: '50px auto' }} alt="烟花" src={`${publicPath}img/fires.gif`}/>
+            : <div className="ui-form ui-border-t">
                 <form action="">
                     {list.map(item => <div key={item.id} className="ui-form-item ui-border-b">
                         <label style={{ width: 150 }}>
@@ -45,12 +53,13 @@ export const Detail = () => {
                         {item.answer && <span>{item.answer === item.result.toString() ? '✅' : '❌'}</span>}
                     </div>)}
                 </form>
-            </div>
+            </div>}
+            
         </> : <section className="ui-notice">
             <i></i>
             <p>还没有试题</p>
         </section>}
-    </>
+    </div>
 }
 
 export default Detail

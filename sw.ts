@@ -13,6 +13,7 @@ const CACHES = [
     RENAME.__OUTPUT_PATH__("./src/index.tsx"),
     RENAME.__OUTPUT_PATH__("./img/frozen.css"),
     RENAME.__OUTPUT_PATH__("./img/math.png"),
+    RENAME.__OUTPUT_PATH__("./img/fires.gif"),
     RENAME.__OUTPUT_PATH__("./img/study-48x48.png"),
 ]
 
@@ -43,7 +44,7 @@ self.addEventListener('fetch', function (_event) {
     const event = _event as FetchEvent
     const { url } = event.request
 
-    for(let i = 0; i < CACHES.length; i++) {
+    for(let i = 0; i < EXCEPTS.length; i++) {
         if (url.indexOf(EXCEPTS[i]) != -1) {
             return;
         }
