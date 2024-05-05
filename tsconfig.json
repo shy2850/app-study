@@ -1,0 +1,17 @@
+{
+    "compilerOptions": {
+        "allowSyntheticDefaultImports": true,
+        "declaration": true,
+        "moduleResolution": "node",
+        "module": "esnext",
+        "jsx": "react",
+        "jsxFactory": "React.createElement",
+        "jsxFragmentFactory": "React.Fragment",
+        "sourceMap": true,
+        "target": "ESNext"
+    },
+    "include": [
+        "src/**.ts",
+        "src/**.tsx"
+    ]
+}
