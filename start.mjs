@@ -9,4 +9,5 @@ createServer({
     try_files: 'index.html',
     buildFilter: p => /^(index|manifest|favicon|img|$)/.test(p),
     watchFilter: p => /^(index|manifest|favicon|img|src|$)/.test(p),
+    dest: 'docs',
 })

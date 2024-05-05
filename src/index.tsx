@@ -2,7 +2,7 @@ import React from 'react'
 import { createRoot } from 'react-dom/client'
 import { MathIndex, MathDetail } from './apps/math'
 import {
-    createBrowserRouter,
+    createHashRouter,
     RouterProvider,
     Route,
     Link,
@@ -28,7 +28,7 @@ if (app) {
         </>
     }
 
-    const router = createBrowserRouter([
+    const router = createHashRouter([
         {
           path: "/",
           element: <App />,

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import * as apis from '../../db'
 import { Question } from '../../interface'
-import { useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 
 export const Detail = () => {
     const { id } = useParams()
@@ -23,10 +23,16 @@ export const Detail = () => {
             <div className="ui-progress">
                 <span style={{ width: `${list.filter(t => !!t.answer).length * 100 / list.length}%` }}></span>
             </div>
+            <div style={{ padding: '10px', overflow: 'hidden' }}>
+                <Link to="/math">⬅️ 返回</Link>
+                <span style={{ float: 'right' }}>
+                    <b>{(list.filter(t => t.result + '' === t.answer + '').length * 100 / list.length).toFixed(0)}</b> 分
+                </span>
+            </div>
             <div className="ui-form ui-border-t">
                 <form action="">
                     {list.map(item => <div key={item.id} className="ui-form-item ui-border-b">
-                        <label >
+                        <label style={{ width: '20%' }}>
                             {item.content} =
                         </label>
                         <input type="text" placeholder="?" onBlur={async (e) => {
