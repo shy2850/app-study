@@ -11,6 +11,7 @@ createServer({
         entries: [
             'index\\.html',
             '^sw\\.js$',
+            'manifest.json',
         ],
         searchValue: [
             '\\s(?:href|src)="([^"]*?)"',
