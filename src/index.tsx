@@ -7,10 +7,11 @@ import {
     Route,
     Link,
 } from "react-router-dom";
+import { publicPath } from './config';
 
 if ('serviceWorker' in navigator) {
     addEventListener('load', async function () {
-        navigator.serviceWorker.register('/static/sw.js', {scope: '/'})
+        navigator.serviceWorker.register(`${publicPath}sw.js`, {scope: publicPath})
     })
 }
 
@@ -22,7 +23,7 @@ if (app) {
         const width = clientWidth / cols
         return <>
             <Link to={'/math'} style={{ float: 'left', width, height: width, textAlign: 'center', padding: '12px 0' }}>
-                <img src="/img/math.png" style={{ borderRadius: 10, boxShadow: '0 0 5px rgba(0,0,0,.4)' }}/>
+                <img src={`${publicPath}img/math.png`} style={{ borderRadius: 10, boxShadow: '0 0 5px rgba(0,0,0,.4)' }}/>
             </Link>
             
         </>

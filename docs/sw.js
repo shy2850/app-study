@@ -1,0 +1,2 @@
+(()=>{var n="app-study-cache",c="/app-study/";var a=["","index.html","manifest.json","favicon.ico","static/bundle.js","img/frozen.css","mg/math.png","img/study-48x48.png"].map(e=>`${c}${e}`);self.addEventListener("install",function(e){e.waitUntil(Promise.all([caches.open(n).then(t=>t.addAll(a)),self.skipWaiting()]))});self.addEventListener("activate",function(e){e.waitUntil(Promise.all([self.clients.claim(),caches.keys().then(t=>Promise.all(t.map(s=>{if(s!==n)return caches.delete(s)})))]))});})();
+//# sourceMappingURL=sw.js.map

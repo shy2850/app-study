@@ -8,9 +8,20 @@ createServer({
     gzip: true,
     try_files: 'index.html',
     namehash: {
-        publicPath: '/app-study/',
+        publicPath: mode === 'build' ? '/app-study/' : '/',
     },
     buildFilter: p => /^(index|manifest|favicon|img|$)/.test(p),
     watchFilter: p => /^(index|manifest|favicon|img|src|$)/.test(p),
+    onMemoryLoad: (store) => {
+        const sw = store.origin_map.get('src/sw.ts')
+        if (sw) {
+            const { data } = sw
+            store.save({
+                originPath: 'sw.js',
+                outputPath: '/sw.js',
+                data,
+            })
+        }
+    },
     dest: 'docs',
 })
