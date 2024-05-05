@@ -49,7 +49,7 @@ export const Detail = () => {
                                 await apis.updateQuestion(item.id, { ...item, answer: e.target.value })
                                 reload()
                             }
-                        }}/>
+                        }} value={item.answer}/>
                         {item.answer && <span>{item.answer === item.result.toString() ? '✅' : '❌'}</span>}
                     </div>)}
                 </form>
