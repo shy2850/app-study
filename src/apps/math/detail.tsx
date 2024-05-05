@@ -18,6 +18,7 @@ export const Detail = () => {
         reload()
     }, [])
 
+    const width = document.documentElement.clientWidth
     return <>
         {list.length > 0 ? <>
             <div className="ui-progress">
@@ -32,10 +33,10 @@ export const Detail = () => {
             <div className="ui-form ui-border-t">
                 <form action="">
                     {list.map(item => <div key={item.id} className="ui-form-item ui-border-b">
-                        <label style={{ width: 100 }}>
+                        <label style={{ width: 150 }}>
                             {item.content} =
                         </label>
-                        <input type="text" placeholder="?" onBlur={async (e) => {
+                        <input style={{ width: width - 200, paddingLeft: 2 }} type="text" placeholder="?" onBlur={async (e) => {
                             if (item.id) {
                                 await apis.updateQuestion(item.id, { ...item, answer: e.target.value })
                                 reload()
