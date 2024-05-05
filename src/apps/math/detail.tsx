@@ -4,18 +4,6 @@ import { Question } from '../../interface'
 import { Link, useParams } from 'react-router-dom'
 import { publicPath } from '../../config'
 
-interface InputProps extends React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> {
-
-}
-const Input = (props: InputProps) => {
-    const {value, ...rest} = props
-    const ref = useRef<HTMLInputElement>()
-    useEffect(() => {
-        ref.current.value = value + ''
-    }, [value])
-    return <input {...rest} ref={ref}/>
-}
-
 export const Detail = () => {
     const { id } = useParams()
     if (!id || isNaN(Number(id))) {
@@ -56,12 +44,12 @@ export const Detail = () => {
                         <label style={{ width: 150 }}>
                             {item.content} =
                         </label>
-                        <Input style={{ width: width - 200, paddingLeft: 2 }} type="text" placeholder="?" onBlur={async (e) => {
+                        <input style={{ width: width - 200, paddingLeft: 2 }} type="text" placeholder="?" onBlur={async (e) => {
                             if (item.id) {
                                 await apis.updateQuestion(item.id, { ...item, answer: e.target.value })
                                 reload()
                             }
-                        }} value={item.answer}/>
+                        }} defaultValue={item.answer}/>
                         {item.answer && <span>{item.answer === item.result.toString() ? '✅' : '❌'}</span>}
                     </div>)}
                 </form>
