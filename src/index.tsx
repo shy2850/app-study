@@ -11,8 +11,10 @@ import { publicPath } from './config';
 
 if ('serviceWorker' in navigator) {
     addEventListener('load', async function () {
-        console.log('[SW]', 'registering...', publicPath)
-        navigator.serviceWorker.register(`${publicPath}sw.js`, {scope: publicPath})
+        navigator.serviceWorker.register(`${publicPath}sw.js`)
+        .then(res => {
+            console.log('service worker registered', res.scope)
+        })
     })
 }
 
