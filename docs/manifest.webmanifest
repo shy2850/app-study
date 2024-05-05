@@ -1,0 +1,13 @@
+{
+    "short_name": "练",
+    "name": "练习本",
+    "icon": [
+        {
+            "src": "./img/study-48x48.png",
+            "type": "image/png",
+            "sizes": "48x48"
+        }
+    ],
+    "start_url": "./",
+    "display": "standalone"
+}

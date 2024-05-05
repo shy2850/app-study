@@ -34,3 +34,26 @@ self.addEventListener('activate', function (_event) {
         })))
     ]))
 })
+self.addEventListener('fetch', function (_event) {
+    const event = _event as FetchEvent
+    const { url } = event.request
+
+    for(let i = 0; i < CACHES.length; i++) {
+        if (url.indexOf(CACHES[i]) === -1) {
+            return;
+        }
+    }
+
+    event.respondWith(caches.match(event.request).then(res => {
+        if (res) {
+            console.log('cache hit', event.request.url)
+            return res
+        }
+        return fetch(event.request).then(res => {
+            if (res.ok) {
+                caches.open(CACHE_KEY).then(cache => cache.put(event.request, res.clone()))
+            }
+            return res
+        })
+    }))
+})
