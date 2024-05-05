@@ -32,7 +32,7 @@ export const Detail = () => {
             <div className="ui-form ui-border-t">
                 <form action="">
                     {list.map(item => <div key={item.id} className="ui-form-item ui-border-b">
-                        <label style={{ width: '20%' }}>
+                        <label style={{ width: 100 }}>
                             {item.content} =
                         </label>
                         <input type="text" placeholder="?" onBlur={async (e) => {
