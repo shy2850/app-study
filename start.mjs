@@ -7,6 +7,9 @@ createServer({
     port: 10777,
     gzip: true,
     try_files: 'index.html',
+    namehash: {
+        publicPath: '/app-study/',
+    },
     buildFilter: p => /^(index|manifest|favicon|img|$)/.test(p),
     watchFilter: p => /^(index|manifest|favicon|img|src|$)/.test(p),
     dest: 'docs',
