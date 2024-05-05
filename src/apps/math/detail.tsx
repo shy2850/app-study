@@ -1,8 +1,20 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import * as apis from '../../db'
 import { Question } from '../../interface'
 import { Link, useParams } from 'react-router-dom'
 import { publicPath } from '../../config'
+
+interface InputProps extends React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> {
+
+}
+const Input = (props: InputProps) => {
+    const {value, ...rest} = props
+    const ref = useRef<HTMLInputElement>()
+    useEffect(() => {
+        ref.current.value = value + ''
+    }, [value])
+    return <input {...rest} ref={ref}/>
+}
 
 export const Detail = () => {
     const { id } = useParams()
@@ -44,7 +56,7 @@ export const Detail = () => {
                         <label style={{ width: 150 }}>
                             {item.content} =
                         </label>
-                        <input style={{ width: width - 200, paddingLeft: 2 }} type="text" placeholder="?" onBlur={async (e) => {
+                        <Input style={{ width: width - 200, paddingLeft: 2 }} type="text" placeholder="?" onBlur={async (e) => {
                             if (item.id) {
                                 await apis.updateQuestion(item.id, { ...item, answer: e.target.value })
                                 reload()
