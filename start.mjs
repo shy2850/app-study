@@ -1,17 +1,10 @@
 import { createServer } from 'f2e-server3'
-import { join } from 'path'
-import { readFileSync } from 'fs'
-
 const mode = [].slice.call(process.argv).pop()
 
 createServer({
     mode: mode === 'build' ? 'build' : 'dev',
     port: 10777,
     gzip: true,
-    // ssl: {
-    //     key_file_name: join(import.meta.dirname, './certificate/private.pem'),
-    //     cert_file_name: join(import.meta.dirname, './certificate/csr.crt'),
-    // },
     try_files: 'index.html',
     namehash: {
         entries: [

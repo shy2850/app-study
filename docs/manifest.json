@@ -8,6 +8,8 @@
             "sizes": "48x48"
         }
     ],
-    "start_url": "./",
+    "theme_color": "#FFFFFF",
+    "background_color": "#FFFFFF",
+    "start_url": "/web-study/",
     "display": "standalone"
 }

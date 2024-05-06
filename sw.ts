@@ -3,7 +3,7 @@ import { FetchEvent } from "./src/interface";
 import { publicPath } from './src/config'
 
 const RENAME = {
-    __OUTPUT_PATH__: (a = '') => a
+    __OUTPUT_PATH__: (a = '') => a.split('?')[0]
 }
 const CACHES = [
     publicPath,
@@ -26,18 +26,6 @@ self.addEventListener('install', function (_event) {
     const event = _event as FetchEvent
     event.waitUntil(Promise.all([
         caches.open(CACHE_KEY).then(cache => cache.addAll(CACHES)),
-        self['skipWaiting']()
-    ]))
-})
-self.addEventListener('activate', function (_event) {
-    const event = _event as FetchEvent
-    event.waitUntil(Promise.all([
-        self['clients'].claim(),
-        caches.keys().then(names => Promise.all(names.map(n => {
-            if (n !== CACHE_KEY) {
-                return caches.delete(n)
-            }
-        })))
     ]))
 })
 self.addEventListener('fetch', function (_event) {
@@ -49,11 +37,5 @@ self.addEventListener('fetch', function (_event) {
             return;
         }
     }
-
-    event.respondWith(caches.match(event.request).then(res => res || fetch(event.request.clone()).then(function (resp) {
-        if (!resp || resp.status !== 200) {
-            return resp
-        }
-        caches.open(CACHE_KEY).then(cache => cache.put(event.request, resp.clone()))
-    })))
+    event.respondWith(caches.match(event.request).then(res => res || fetch(event.request)))
 })
